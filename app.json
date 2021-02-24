@@ -1,0 +1,12 @@
+{
+  "name": "wallpaperApp",
+  "displayName": "wallpaperApp",
+  "expo": {
+    "name": "wallpaperApp",
+    "slug": "wallpaperApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
