@@ -1,33 +1,60 @@
-import React from 'react';
-import { View } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react'
+import { View, TouchableOpacity, Text } from 'react-native'
+import ManageWallpaper, { TYPE } from 'react-native-manage-wallpaper'
 
 import theme from '../../themes/light-theme'
+import FocusAwareStatusBar from '../../components/StatusBar/index' 
 
-const FavoritesStack = createStackNavigator();
+export default function Favorites(){
 
-const FavoritesStackScreen = () => (
-    <FavoritesStack.Navigator screenOptions={{
-        headerStyle:{
-          backgroundColor: theme.favoritesColor
-        },
-        headerTintColor: theme.titleColor,
-        headerTitleStyle: {
-          fontWeight: theme.titleFontWeight
-        }
-    }}>
-
-      <FavoritesStack.Screen  name="Favorites" 
-                              component={Favorites} 
-                              options={{ title: 'Favorites' }}>
-      </FavoritesStack.Screen>
-    </FavoritesStack.Navigator>
-  );
-   
-export default FavoritesStackScreen; 
-
-function Favorites(){
-    return(
-        <View></View>
+  _callback = res => {
+    console.log('Response: ', res);
+  };
+ 
+  _setWallpaper = () => {
+   ManageWallpaper.setWallpaper(
+      {
+        uri: 'https://i.pinimg.com/originals/76/5e/1d/765e1dc8cb1cc115fb3b0b39a895fdeb.jpg',
+      },
+      this._callback,
+      TYPE.HOME,
     );
+  };
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+      }}
+    >
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.favoritesColor} />
+      
+      <TouchableOpacity
+        style={{
+          paddingHorizontal: 30,
+          paddingVertical: 8,
+          marginBottom: 24,
+          borderRadius: 16,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#000000',
+        }}
+        //onPress={this._setWallpaper}
+      >
+        <Text
+          style={{
+            fontSize: 20,
+            margin: 10,
+            textAlign: 'center',
+            color: '#FFFFFF',
+          }}
+        >
+          Change Home Wallpaper
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 }

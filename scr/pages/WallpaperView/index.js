@@ -1,87 +1,113 @@
 import * as React from 'react';
-import { StatusBar, Animated, View, Dimensions, StyleSheet} from 'react-native';
+import { StatusBar, Animated, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 
 import getWallpaperList from '../../services/wallpaperListFirebase'
-import { Container, Wallpaper } from './styles'
+import {
+    Container,
+    Wallpaper,
+    Button,
+    ButtonBar
+} from './styles'
 
 const { width, height } = Dimensions.get('screen');
 
 const imageW = width * 0.7;
 const imageH = imageW * 1.54;
 
-export default function WallpaperView ({ route }) {
+export default function WallpaperView({ route }) {
 
     const data = getWallpaperList(route.params.key);
 
     const scrollX = React.useRef(new Animated.Value(0)).current;
 
     return (
-        
+
         <Container>
             <StatusBar hidden />
             <View style={StyleSheet.absoluteFillObject}>
 
-                    {data.map((image, index) => {
-                        const inputRange = [
-                            (index - 1) * width,
-                            index * width,
-                            (index + 1) * width
-                        ]
-                        const opacity = scrollX.interpolate({
-                            inputRange,
-                            outputRange: [0, 1, 0]
-                        })
+                {data.map((image, index) => {
+                    const inputRange = [
+                        (index - 1) * width,
+                        index * width,
+                        (index + 1) * width
+                    ]
+                    const opacity = scrollX.interpolate({
+                        inputRange,
+                        outputRange: [0, 1, 0]
+                    })
+                    
+                    return (
 
-                    return(
-                        
                         <Animated.Image key={`image-${index}`}
-                                        source={{uri: image}}
-                                        style={[
-                                            StyleSheet.absoluteFillObject,
-                                            {
-                                                opacity
-                                            }
-                                        ]}
-                                        blurRadius={50}
+                            source={{ uri: image }}
+                            style={[
+                                StyleSheet.absoluteFillObject,
+                                {
+                                    opacity
+                                }
+                            ]}
+                            blurRadius={50}
                         />
+
                     )
                 })}
             </View>
 
-            <Animated.FlatList  data={data}
-                                onScroll={Animated.event(
-                                    [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                                    {useNativeDriver: true}
-                                )}
-                                keyExtractor={(item, index) => index.toString()}
-                                horizontal
-                                pagingEnabled
-                                renderItem={({item}) => {
-                                    return(
+            <Animated.FlatList data={data}
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    { useNativeDriver: true }
+                )}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+                pagingEnabled
+                renderItem={({ item }) => {
+                    return (
 
-                                        <View style={{width, 
-                                                    justifyContent: 'center', 
-                                                    alignItems:'center',
-                                                    shadowColor: '#000',
-                                                    shadowOpacity: .5,
-                                                    shadowOffset: {
-                                                        width: 0,
-                                                        height: 0,
+                        <View style={{
+                            width,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            shadowColor: '#000',
+                            shadowOpacity: .5,
+                            shadowOffset: {
+                                width: 0,
+                                height: 0,
 
-                                                    },
-                                                    shadowRadius: 20
-                                                    }}>
+                            },
+                            shadowRadius: 20,
+                            paddingTop: 30
+                        }}>
 
-                                            <Wallpaper source={{uri: item}}
-                                                        width={imageW}
-                                                        height={imageH}
-                                                // Style={{resizeMode: 'cover'}}   
-                                            />
+                            <Wallpaper source={{ uri: item }}
+                                width={imageW}
+                                height={imageH}
+                            // Style={{resizeMode: 'cover'}}   
+                            />
 
-                                        </View>
-                                    )
-            }}
+                        </View>
+                    )
+                }}
             />
+
+            <ButtonBar>
+                <Button>
+                    <MaterialCommunityIcons name="heart" color='#fff' size={26} />
+                </Button>
+
+                <Button>
+                    <MaterialCommunityIcons name="share" color='#fff' size={26} />
+                </Button>
+
+                <Button>
+                    <MaterialCommunityIcons name="download" color='#fff' size={26} />
+                </Button>
+
+            </ButtonBar>
+
         </Container>
     );
 };
