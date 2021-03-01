@@ -1,8 +1,8 @@
 const theme = {
     primaryColor: '#009387',
-    favoritesColor: '#d02860',
-    newsColor: '#694fad',
-    profileColor: '#1f65ff',
+    secondaryColor: '#d02860',
+    tertiaryColor: '#694fad',
+    quaternaryColor: '#1f65ff',
 
     titleColor: '#fff',
     iconOnPressColor: '#fff',

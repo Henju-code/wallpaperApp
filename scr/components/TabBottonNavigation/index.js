@@ -32,7 +32,7 @@ const Tab = createMaterialBottomTabNavigator();
     component={FavoritesStackScreen}
     options={{
       tabBarLabel: 'Favoritos',
-      tabBarColor: theme.favoritesColor,
+      tabBarColor: theme.secondaryColor,
       tabBarIcon: ({ color }) => (
         <MaterialCommunityIcons name="heart" color={color} size={26} />
       ),
@@ -44,7 +44,7 @@ const Tab = createMaterialBottomTabNavigator();
     component={ProfileStackScreen}
     options={{
       tabBarLabel: 'Perfil',
-      tabBarColor: theme.profileColor,
+      tabBarColor: theme.quaternaryColor,
       tabBarIcon: ({ color }) => (
         <MaterialCommunityIcons name="account" color={color} size={26} />
       ),

@@ -7,19 +7,6 @@ import FocusAwareStatusBar from '../../components/StatusBar/index'
 
 export default function Favorites(){
 
-  _callback = res => {
-    console.log('Response: ', res);
-  };
- 
-  _setWallpaper = () => {
-   ManageWallpaper.setWallpaper(
-      {
-        uri: 'https://i.pinimg.com/originals/76/5e/1d/765e1dc8cb1cc115fb3b0b39a895fdeb.jpg',
-      },
-      this._callback,
-      TYPE.HOME,
-    );
-  };
 
   return (
     <View
@@ -30,7 +17,7 @@ export default function Favorites(){
         backgroundColor: '#F5FCFF',
       }}
     >
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.favoritesColor} />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.secondaryColor} />
       
       <TouchableOpacity
         style={{

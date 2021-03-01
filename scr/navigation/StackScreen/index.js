@@ -28,7 +28,7 @@ export const HomeStackScreen = () => (
 export const FavoritesStackScreen = () => (
     <FavoritesStack.Navigator screenOptions={{
         headerStyle: {
-            backgroundColor: theme.favoritesColor
+            backgroundColor: theme.secondaryColor
         },
         headerTintColor: theme.titleColor,
         headerTitleStyle: {
@@ -46,7 +46,7 @@ export const FavoritesStackScreen = () => (
 export const ProfileStackScreen = () => (
     <ProfileStack.Navigator screenOptions={{
         headerStyle: {
-            backgroundColor: theme.profileColor
+            backgroundColor: theme.quaternaryColor
         },
         headerTintColor: theme.titleColor,
         headerTitleStyle: {

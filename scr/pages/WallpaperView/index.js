@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { StatusBar, Animated, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-
+import ApplyButton from '../../components/Buttons/Apply/index'
+import FavoriteButton from '../../components/Buttons/Favorite/index'
+import ShareButton from '../../components/Buttons/Share/index'
 import getWallpaperList from '../../services/wallpaperListFirebase'
-import {
-    Container,
-    Wallpaper,
-    Button,
-    ButtonBar
-} from './styles'
+import { Container, Wallpaper, ButtonBar } from './styles'
 
 const { width, height } = Dimensions.get('screen');
 
@@ -19,6 +15,7 @@ const imageH = imageW * 1.54;
 export default function WallpaperView({ route }) {
 
     const data = getWallpaperList(route.params.key);
+    let inFocus = ''
 
     const scrollX = React.useRef(new Animated.Value(0)).current;
 
@@ -28,7 +25,8 @@ export default function WallpaperView({ route }) {
             <StatusBar hidden />
             <View style={StyleSheet.absoluteFillObject}>
 
-                {data.map((image, index) => {
+                {data.map((item, index) => {
+
                     const inputRange = [
                         (index - 1) * width,
                         index * width,
@@ -38,11 +36,11 @@ export default function WallpaperView({ route }) {
                         inputRange,
                         outputRange: [0, 1, 0]
                     })
-                    
+
                     return (
 
                         <Animated.Image key={`image-${index}`}
-                            source={{ uri: image }}
+                            source={{ uri: item._thumbnail }}
                             style={[
                                 StyleSheet.absoluteFillObject,
                                 {
@@ -65,8 +63,8 @@ export default function WallpaperView({ route }) {
                 horizontal
                 pagingEnabled
                 renderItem={({ item }) => {
-                    return (
 
+                    return (                        
                         <View style={{
                             width,
                             justifyContent: 'center',
@@ -82,31 +80,24 @@ export default function WallpaperView({ route }) {
                             paddingTop: 30
                         }}>
 
-                            <Wallpaper source={{ uri: item }}
+                            <Wallpaper source={{ uri: item._thumbnail }}
                                 width={imageW}
                                 height={imageH}
-                            // Style={{resizeMode: 'cover'}}   
+                                Style={{ resizeMode: 'cover' }}
                             />
+                            <ButtonBar>
 
+                                <FavoriteButton />
+
+                                <ShareButton />
+
+                                <ApplyButton image={item.url} />
+
+                            </ButtonBar>
                         </View>
                     )
                 }}
             />
-
-            <ButtonBar>
-                <Button>
-                    <MaterialCommunityIcons name="heart" color='#fff' size={26} />
-                </Button>
-
-                <Button>
-                    <MaterialCommunityIcons name="share" color='#fff' size={26} />
-                </Button>
-
-                <Button>
-                    <MaterialCommunityIcons name="download" color='#fff' size={26} />
-                </Button>
-
-            </ButtonBar>
 
         </Container>
     );

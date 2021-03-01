@@ -13,7 +13,7 @@ export default function Profile() {
   return (
     <View style={{flex: 1}}>
       <AuthVerification />
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.profileColor} />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.quaternaryColor} />
     </View>      
   )
 }
