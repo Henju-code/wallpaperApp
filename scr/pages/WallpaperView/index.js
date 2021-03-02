@@ -14,10 +14,8 @@ const imageH = imageW * 1.54;
 
 export default function WallpaperView({ route }) {
 
-    const data = getWallpaperList(route.params.key);
-    let inFocus = ''
-
-    const scrollX = React.useRef(new Animated.Value(0)).current;
+    const data = getWallpaperList(route.params.key)
+    const scrollX = React.useRef(new Animated.Value(0)).current
 
     return (
 
@@ -63,7 +61,7 @@ export default function WallpaperView({ route }) {
                 horizontal
                 pagingEnabled
                 renderItem={({ item }) => {
-
+                    
                     return (                        
                         <View style={{
                             width,
@@ -87,7 +85,7 @@ export default function WallpaperView({ route }) {
                             />
                             <ButtonBar>
 
-                                <FavoriteButton />
+                                <FavoriteButton imageRef={route.params.key} image={item} />
 
                                 <ShareButton />
 

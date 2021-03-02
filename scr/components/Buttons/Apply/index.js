@@ -7,10 +7,6 @@ import { Button } from './styles'
 
 export default function ApplyButton({image}) {
 
-    function handleOnPress () {
-        console.log('puff')
-    }
-
     function callback() {
         alert('Aplicado com sucesso!');
     };

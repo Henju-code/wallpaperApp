@@ -4,7 +4,10 @@ import auth from '@react-native-firebase/auth';
 
 import Login from '../pages/Login/index'
 import { logoff } from './authMethods'
-import CreateFavorites from './favoritesListFirebase'
+import {CreateFavorites} from './favoritesListFirebase'
+
+import database from '@react-native-firebase/database'
+
 
 export default function AuthVerification() {
   // Set an initializing state whilst Firebase connects
@@ -20,6 +23,7 @@ export default function AuthVerification() {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
+
   }, []);
 
   if (initializing) return null;
@@ -27,7 +31,7 @@ export default function AuthVerification() {
   if (!user) {
     return <Login />
   }
-
+  
   return (
     <View>
       <Text style={{ color: '#00AAFF', fontSize: 30 }}>Welcome {user.uid}</Text>

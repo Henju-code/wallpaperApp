@@ -21,7 +21,7 @@ export const HomeStackScreen = () => (
             fontWeight: theme.titleFontWeight
         }
     }}>
-        <HomeStack.Screen name="Home" component={Home} options={{ title: 'Home' }} />
+        <HomeStack.Screen name="Home" component={Home} options={{ title: 'Coleções' }} />
     </HomeStack.Navigator>
 );
 
@@ -38,7 +38,7 @@ export const FavoritesStackScreen = () => (
 
         <FavoritesStack.Screen name="Favorites"
             component={Favorites}
-            options={{ title: 'Favorites' }}>
+            options={{ title: 'Favoritos' }}>
         </FavoritesStack.Screen>
     </FavoritesStack.Navigator>
 );
@@ -54,7 +54,7 @@ export const ProfileStackScreen = () => (
         }
     }}>
         <ProfileStack.Screen name="Profile" component={Profile} options={{
-            title: 'Profile',
+            title: 'Perfil',
         }}>
 
         </ProfileStack.Screen>
