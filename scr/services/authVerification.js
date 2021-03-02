@@ -3,11 +3,7 @@ import { View, Text, Button } from 'react-native'
 import auth from '@react-native-firebase/auth';
 
 import Login from '../pages/Login/index'
-import { logoff } from './authMethods'
-import {CreateFavorites} from './favoritesListFirebase'
-
-import database from '@react-native-firebase/database'
-
+import UserView from '../pages/UserView/index'
 
 export default function AuthVerification() {
   // Set an initializing state whilst Firebase connects
@@ -33,10 +29,11 @@ export default function AuthVerification() {
   }
   
   return (
-    <View>
-      <Text style={{ color: '#00AAFF', fontSize: 30 }}>Welcome {user.uid}</Text>
-      <Button title='LogOut' onPress={logoff}></Button>
-      <Button title='favorites' onPress={() => CreateFavorites(user.uid)}></Button>
-    </View>
+    <UserView />
+    // <View>
+    //   <Text style={{ color: '#00AAFF', fontSize: 30 }}>Welcome {user.uid}</Text>
+    //   <Button title='LogOut' onPress={logoff}></Button>
+    //   <Button title='favorites' onPress={() => CreateFavorites(user.uid)}></Button>
+    // </View>
   );
 }

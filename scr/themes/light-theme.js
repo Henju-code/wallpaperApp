@@ -1,8 +1,8 @@
 const theme = {
-    primaryColor: '#009387',
+    primaryColor: '#1f65ff',
     secondaryColor: '#d02860',
-    tertiaryColor: '#694fad',
-    quaternaryColor: '#1f65ff',
+    tertiaryColor: '#009387',
+    quaternaryColor: '#694fad',
 
     titleColor: '#fff',
     iconOnPressColor: '#fff',

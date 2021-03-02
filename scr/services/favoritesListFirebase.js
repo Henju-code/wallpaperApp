@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import database from '@react-native-firebase/database'
 import auth from '@react-native-firebase/auth';
+import Login from '../pages/Login/index'
 
 export function AddFavorites(imageRef, image) {
+
+    const userExists = auth().currentUser
+    if ( userExists === null){
+        alert('Do login first')
+        return
+    }
 
     const uid = auth().currentUser.uid;
 
@@ -80,5 +87,6 @@ export function getFavorites() {
             })
         })
     }
+
     return imagesList
 }

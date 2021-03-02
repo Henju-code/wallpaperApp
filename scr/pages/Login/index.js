@@ -109,6 +109,7 @@ export default function Login() {
                 <TextInput placeholder="Senha"
                     style={styles.input}
                     autoCorrect={false}
+                    secureTextEntry={true}
                     onChangeText={(password) => { setPassword(password) }}
                 />
 
