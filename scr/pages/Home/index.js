@@ -7,12 +7,11 @@ import { Container, Item, Thumbnail, Invisible } from './styles'
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
-import { getFavorites } from '../../services/favoritesListFirebase'
+
 const numColumns = 2;
 const WIDTH = Dimensions.get('window').width;
 
 function formatData(thumbnails, numColumns) {
-const data = getFavorites();
 
   const totalRows = Math.floor(thumbnails.length / numColumns)
   let totalLastRow = thumbnails.length - (totalRows * numColumns)

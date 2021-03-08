@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get('screen');
 const imageW = width * 0.7;
 const imageH = imageW * 1.54;
 
-export function Carousel({ data }) {
+export function Carousel({data}) {
 
     const scrollX = React.useRef(new Animated.Value(0)).current
 
@@ -90,7 +90,7 @@ export function Carousel({ data }) {
 
                                 <ShareButton />
 
-                                <RemoveButton />
+                                <RemoveButton image={item.key} />
 
                             </ButtonBar>
                         </View>

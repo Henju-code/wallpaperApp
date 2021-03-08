@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import database from '@react-native-firebase/database'
-import auth from '@react-native-firebase/auth';
-import Login from '../pages/Login/index'
+import auth from '@react-native-firebase/auth'
 
-export function AddFavorites(imageRef, image) {
+const uid = auth().currentUser.uid
+// const imagesList = []
+//const getFavoritesPath = () => database().ref(`/users/${uid}/favourites`) 
+
+export async function AddFavorites(imageRef, image) {
 
     const userExists = auth().currentUser
-    if ( userExists === null){
+    if (userExists === null) {
         alert('Do login first')
         return
     }
 
-    const uid = auth().currentUser.uid;
+    async function CreateFavorites(uid) {
 
-    function CreateFavorites(uid) {
-
-        const newReference = database()
+        const newReference = await database()
             .ref(`/users/${uid}`)
             .once('value', (snapshot) => {
                 const exists = snapshot.exists()
@@ -26,7 +27,7 @@ export function AddFavorites(imageRef, image) {
             })
     }
 
-    const newReference = database()
+    const newReference = await database()
         .ref(`/users/${uid}/favourites/${imageRef}`)
         .once('value', (snapshot) => {
             const exists = snapshot.exists()
@@ -34,7 +35,6 @@ export function AddFavorites(imageRef, image) {
                 CreateFavorites(uid);
                 database().ref(`/users/${uid}/favourites/${imageRef}`).set({})
             }
-
             database().ref(`/users/${uid}/favourites/${imageRef}/${image.key}`)
                 .set({
                     desc: image.desc,
@@ -44,49 +44,97 @@ export function AddFavorites(imageRef, image) {
                 })
         })
 }
-const imagesList = []
 
 export function getFavorites() {
 
-    const [folders, setFolders] = useState([]);
-    const uid = auth().currentUser.uid
+    let counter = 0
+    const auxList = []
+
+    const foldersList = []
+    const [imagesList, setImagesList] = useState([])
 
     useEffect(() => {
-        const newReference = database().ref(`/users/${uid}/favourites`)
-        .on('value', (snapshot) => {
-            const favorites = snapshot.val()
-            const foldersList = []
+        async function fecthData() {
+            await database().ref(`/users/${uid}/favourites`)
+                .on('value', (snapshot) => {
+                    const favorites = snapshot.val()
 
-            for (let key in favorites) {
-                foldersList.push({ key, ...favorites[key] })
+                    for (let key in favorites) {
+                        foldersList.push({ key, ...favorites[key] })
 
+                    }
+                    foldersList.map((item) => {
+                        getImages(item.key)
+                    })
+                })
+
+            const getImages = async (key) => {
+                await database().ref(`/users/${uid}/favourites/${key}`)
+                    .once('value', (snapshot) => {
+                        const images = snapshot.val()
+                        const imgList = []
+
+                        for (let key in images) {
+                            imgList.push({ key, ...images[key] })
+
+                        }
+                        imgList.map((item) => {
+                            auxList[counter] = item
+                            counter++
+                        })
+                        setImagesList(auxList)
+                    })
             }
-            setFolders(foldersList)
-        })
-    } , [])
-
-    let counter = 0
-
-    folders.map((item) => {
-        getImages(item.key)
-    })
-        
-    function getImages (key) {
-        const newReference = database().ref(`/users/${uid}/favourites/${key}`)
-        .once('value', (snapshot) => {
-            const images = snapshot.val()
-            const imgList = []
-
-            for (let key in images) {
-                imgList.push({ key, ...images[key] })
-
-            }
-            imgList.map((item) =>{
-                imagesList[counter] = item
-                counter++
-            })
-        })
-    }
+            counter = 0;
+        }
+        fecthData();
+    }, [])
 
     return imagesList
+}
+
+// let imgFolders= [];
+
+export async function removeFavorites(image) {
+
+
+
+    // const foldersList = [];
+    // const newReference = await database().ref(`/users/${uid}/favourites`)
+    //     .on('value', (snapshot) => {
+    //         const favorites = snapshot.val()
+
+    //         for (let key in favorites) {
+    //             foldersList.push({ key, ...favorites[key] })
+
+    //         }
+    //         imgFolders = foldersList
+    //     })
+
+
+    // imgFolders.map((item) => {
+    //     getImages(item.key)
+    // })
+
+    // async function getImages(key) {
+    //     const newReference = await database().ref(`/users/${uid}/favourites/${key}`)
+    //         .once('value', (snapshot) => {
+    //             const images = snapshot.val()
+    //             const imgList = []
+
+    //             for (let key in images) {
+    //                 imgList.push({ key, ...images[key] })
+
+    //             }
+    //             console.log('pru')
+    //             imgList.map((item) => {
+    //                 if (item.key === image) {
+    //                     console.log(item.key)
+    //                     console.log(image)
+    //                     database().ref(`/users/${uid}/favourites/${item.key}/${image}`).set(null)
+
+    //                 }
+    //             })
+    //         })
+    // }
 }

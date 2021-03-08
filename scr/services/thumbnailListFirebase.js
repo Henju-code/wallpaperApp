@@ -7,8 +7,8 @@ function getKeyList() {
   const [keyList, setKeyList] = useState([]);
   const list = [];
 
-  useEffect(() => {
-    const documentRef = database().ref('/categories')
+  useEffect(async () => {
+    const documentRef = await database().ref('/categories')
     documentRef.on("value", (datasnapshot) => {
       const docSnapshot = datasnapshot.val();
 
