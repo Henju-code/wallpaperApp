@@ -86,11 +86,11 @@ export function Carousel({data}) {
                             />
                             <ButtonBar>
 
+                                <RemoveButton image={item.key} />
+
                                 <ApplyButton image={item.urlSource} />
 
                                 <ShareButton />
-
-                                <RemoveButton image={item.key} />
 
                             </ButtonBar>
                         </View>

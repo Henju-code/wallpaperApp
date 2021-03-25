@@ -1,6 +1,6 @@
 import React from 'react'
 import auth from '@react-native-firebase/auth'
-import { logoff } from '../../services/authMethods'
+import { logoff } from '../../services/Firebase/Auth/authMethods'
 import { Container, Button, ButtonTitle, Email, UserPhoto } from './styles'
 import {
     View,

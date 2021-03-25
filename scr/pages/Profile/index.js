@@ -6,7 +6,7 @@ import {
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
-import AuthVerification from '../../services/authVerification'
+import AuthVerification from '../../services/Firebase/Auth/authVerification'
 
 export default function Profile() {
 

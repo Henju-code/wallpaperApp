@@ -6,10 +6,13 @@ import theme from '../../themes/light-theme'
 import Home from '../../pages/Home/index'
 import Favorites from '../../pages/Favorites/index'
 import Profile from '../../pages/Profile/index'
+//import Cine from '../../pages/Cine/index'
+import Loader from '../../components/Loader/index'
 
-const HomeStack = createStackNavigator();
-const FavoritesStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
+const HomeStack = createStackNavigator()
+const FavoritesStack = createStackNavigator()
+const ProfileStack = createStackNavigator()
+const CineStack = createStackNavigator()
 
 export const HomeStackScreen = () => (
     <HomeStack.Navigator screenOptions={{
@@ -41,6 +44,24 @@ export const FavoritesStackScreen = () => (
             options={{ title: 'Favoritos' }}>
         </FavoritesStack.Screen>
     </FavoritesStack.Navigator>
+);
+
+export const CineStackScreen = () => (
+    <CineStack.Navigator screenOptions={{
+        headerStyle: {
+            backgroundColor: theme.tertiaryColor
+        },
+        headerTintColor: theme.titleColor,
+        headerTitleStyle: {
+            fontWeight: theme.titleFontWeight
+        }
+    }}>
+
+        <CineStack.Screen name="Cine"
+            component={Loader}
+            options={{ title: 'Cinema' }}>
+        </CineStack.Screen>
+    </CineStack.Navigator>
 );
 
 export const ProfileStackScreen = () => (

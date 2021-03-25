@@ -1,15 +1,15 @@
 //import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import React from 'react'
+import { FlatList, Dimensions, TouchableOpacity, View, Text } from 'react-native'
 
-import getThumbnails from '../../services/thumbnailListFirebase'
+import getThumbnails from '../../services/Firebase/RealtimeDatabase/thumbnailListFirebase'
 import { Container, Item, Thumbnail, Invisible } from './styles'
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
 
-const numColumns = 2;
-const WIDTH = Dimensions.get('window').width;
+const numColumns = 2
+const WIDTH = Dimensions.get('window').width
 
 function formatData(thumbnails, numColumns) {
 
@@ -25,7 +25,8 @@ function formatData(thumbnails, numColumns) {
 
 export default function Home({ navigation }) {
 
-  const thumbnails = getThumbnails();
+  const thumbnails = getThumbnails()
+
   return (
     <Container>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.primaryColor} />

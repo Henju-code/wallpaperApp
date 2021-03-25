@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native'
 import auth from '@react-native-firebase/auth';
 
-import Login from '../pages/Login/index'
-import UserView from '../pages/UserView/index'
+import Login from '../../../pages/Login/index'
+import UserView from '../../../pages/UserView/index'
 
 export default function AuthVerification() {
   // Set an initializing state whilst Firebase connects
@@ -30,10 +29,5 @@ export default function AuthVerification() {
   
   return (
     <UserView />
-    // <View>
-    //   <Text style={{ color: '#00AAFF', fontSize: 30 }}>Welcome {user.uid}</Text>
-    //   <Button title='LogOut' onPress={logoff}></Button>
-    //   <Button title='favorites' onPress={() => CreateFavorites(user.uid)}></Button>
-    // </View>
   );
 }

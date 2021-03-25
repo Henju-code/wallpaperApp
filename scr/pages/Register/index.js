@@ -12,7 +12,7 @@ import {
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
-import { registerUser } from '../../services/authMethods'
+import { registerUser } from '../../services/Firebase/Auth/authMethods'
 
 export default function Register() {
 

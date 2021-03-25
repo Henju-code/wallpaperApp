@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
-import { signInUser } from '../../services/authMethods'
+import { signInUser } from '../../services/Firebase/Auth/authMethods'
 
 export default function Login() {
 

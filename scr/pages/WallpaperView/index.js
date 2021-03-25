@@ -4,7 +4,7 @@ import { StatusBar, Animated, View, Dimensions, StyleSheet, TouchableOpacity } f
 import ApplyButton from '../../components/Buttons/Apply/index'
 import FavoriteButton from '../../components/Buttons/Favorite/index'
 import ShareButton from '../../components/Buttons/Share/index'
-import getWallpaperList from '../../services/wallpaperListFirebase'
+import getWallpaperList from '../../services/Firebase/RealtimeDatabase/wallpaperListFirebase'
 import { Container, Wallpaper, ButtonBar } from './styles'
 
 const { width, height } = Dimensions.get('screen');
@@ -61,8 +61,8 @@ export default function WallpaperView({ route }) {
                 horizontal
                 pagingEnabled
                 renderItem={({ item }) => {
-                    
-                    return (                        
+
+                    return (
                         <View style={{
                             width,
                             justifyContent: 'center',
@@ -85,11 +85,11 @@ export default function WallpaperView({ route }) {
                             />
                             <ButtonBar>
 
+                                <ApplyButton image={item.url} />
+
                                 <FavoriteButton imageRef={route.params.key} image={item} />
 
-                                <ShareButton />
-
-                                <ApplyButton image={item.url} />
+                                <ShareButton imageUrl={item.url} />
 
                             </ButtonBar>
                         </View>
