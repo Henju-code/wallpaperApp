@@ -8,13 +8,14 @@ import MainTabScreen from '../../components/TabBottonNavigation/index'
 import WallpaperView from '../../pages/WallpaperView/index'
 import Login from '../../pages/Login/index'
 import Register from '../../pages/Register/index'
+import ApplyWallpaperView from '../../pages/ApplyWallpaperView/index'
 
 const Stack = createStackNavigator();
 
 export default function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator mode="modal" headerMode='none' >
 
         <Stack.Screen options={{ headerShown: false }}
           name="MainTabScreen" component={MainTabScreen} />
@@ -25,7 +26,8 @@ export default function Routes() {
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: '#000'
           }
         }}
           name="WallpaperView" component={WallpaperView} />
@@ -51,6 +53,19 @@ export default function Routes() {
           }
         }}
           name="Register" component={Register} />
+
+        <Stack.Screen options={{
+          //headerShown: false
+          headerStyle: {
+            backgroundColor: 'white',
+            shadowColor: 'transparent',
+            elevation: 0,
+            marginBottom: -30
+          },
+          //headerShown: false,
+          
+        }}
+          name="ApplyWallpaperView" component={ApplyWallpaperView} />
 
       </Stack.Navigator>
     </NavigationContainer>

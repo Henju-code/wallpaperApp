@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StatusBar, Animated, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 
+import PreviousButton from '../../components/Buttons/Previous/index'
 import ApplyButton from '../../components/Buttons/Apply/index'
 import FavoriteButton from '../../components/Buttons/Favorite/index'
 import ShareButton from '../../components/Buttons/Share/index'
@@ -20,9 +21,10 @@ export default function WallpaperView({ route }) {
     return (
 
         <Container>
+                <PreviousButton />
+
             <StatusBar hidden />
             <View style={StyleSheet.absoluteFillObject}>
-
                 {data.map((item, index) => {
 
                     const inputRange = [

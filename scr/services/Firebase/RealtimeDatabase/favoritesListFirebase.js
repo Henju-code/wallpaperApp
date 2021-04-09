@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import database from '@react-native-firebase/database'
 import auth from '@react-native-firebase/auth'
 
-const uid = auth().currentUser.uid
+// const uid = auth().currentUser.uid
 
 export async function AddFavorites(imageRef, image) {
 
@@ -11,6 +11,8 @@ export async function AddFavorites(imageRef, image) {
         alert('Do login first')
         return
     }
+
+    const uid = auth().currentUser.uid
 
     async function CreateFavorites(uid) {
 
@@ -44,14 +46,13 @@ export async function AddFavorites(imageRef, image) {
 }
 
 let favorites = []
-export async function getFavorites () {
+export async function getFavorites() {
 
-    //const [favorites, setFavorites] = useState([])
+    const uid = auth().currentUser.uid
     let auxList = []
     let counter = 0
 
-    // useEffect( async () => {
-        await database().ref(`/users/${uid}/favourites`)
+    await database().ref(`/users/${uid}/favourites`)
         .on('value', (snapshot) => {
             const imagesList = snapshot.val()
             let foldersList = []
@@ -79,17 +80,18 @@ export async function getFavorites () {
                     auxList[counter] = item
                     counter++
                 })
-                //setFavorites(auxList)
                 favorites = auxList
             })
     }
     console.log('letBee')
-// }, [])
+
     return favorites
 }
 
 export async function removeFavorites(image) {
 
+    const uid = auth().currentUser.uid
+    
     async function fecthData() {
         const foldersList = []
         await database().ref(`/users/${uid}/favourites`)

@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import { View, Text, Animated, StyleSheet, Easing } from 'react-native'
+import { View, Text, Button, Animated, StyleSheet, Easing } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
 
 export default function Loader() {
 
@@ -23,6 +22,16 @@ export default function Loader() {
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg']
     })
+
+//     function cropPicker () {
+//         ImagePicker.openCropper({
+//         path: logo,
+//         width: 300,
+//         height: 400
+//       }).then(image => {
+//         console.log(image);
+//       });
+// }
 
     const styles = StyleSheet.create({
         obj: {
@@ -55,6 +64,7 @@ export default function Loader() {
                 
             </Animated.View>
             <Text style={styles.text}>Carregando...</Text>
+            {/* <Button title="crop" onPress={cropPicker} ></Button> */}
         </View>
 
     )

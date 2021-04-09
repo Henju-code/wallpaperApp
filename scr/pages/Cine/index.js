@@ -1,4 +1,173 @@
- import * as React from 'react';
+import React, { useState } from 'react'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import ImagePicker from 'react-native-image-crop-picker'
+
+export default function Cine () {
+  const [image, setImage] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqOZM4xXkVnA8UP0TAUTrAU9sSJDNCbi0BlQ&usqp=CAU')
+
+  function takeImageFromGalery () {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image)
+      setImage(image.path)
+    });
+  }
+
+  function cropperWallpaper () {
+    ImagePicker.openCropper({
+      path: 'https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg',
+      width: 300,
+      height: 400
+    }).then(image => {
+      console.log(image);
+      setImage(image.path)
+
+    });
+  }
+
+  return (
+    <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}} >
+
+      <View>
+        <Image style={{width: 300, height: 400}} source={{uri: image}} />
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={() => takeImageFromGalery()} 
+                          style={{width: 300, height: 70, 
+                          backgroundColor: '#030303', borderRadius: 10,
+                          alignItems: 'center', justifyContent: 'center'}} >
+          <Text style={{fontSize: 24, color: '#fff'}} >Get image from galery</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={() => cropperWallpaper()} 
+                          style={{width: 300, height: 70, 
+                          backgroundColor: '#a3a3a3', borderRadius: 10,
+                          alignItems: 'center', justifyContent: 'center'}} >
+          <Text style={{fontSize: 24, color: '#fff', fontWeight: 'bold'}} >Open Cropper</Text>
+        </TouchableOpacity>
+      </View>
+
+    </View>
+  )
+}
+
+// import React from 'react';
+// import { View, Image, Button, StyleSheet, Dimensions } from 'react-native';
+// import ImageCropper from 'react-native-simple-image-cropper';
+
+// const window = Dimensions.get('window');
+// const w = window.width;
+// const h = window.height;
+
+// const IMAGE = 'https://picsum.photos/id/48/500/900';
+
+// const CROP_AREA_WIDTH = w;
+// const CROP_AREA_HEIGHT = h;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//   },
+
+//   buttonContainer: {
+//     position: 'absolute',
+//     bottom: 0,
+//     left: 0,
+//   },
+
+//   imagePreviewContainer: {
+//     position: 'absolute',
+//     top: 20,
+//     right: 0,
+//     borderWidth: 5,
+//     borderColor: 'white',
+//     opacity: 0.8,
+//   },
+
+//   imagePreview: {
+//     width: CROP_AREA_WIDTH / 3,
+//     height: CROP_AREA_HEIGHT / 3,
+//   },
+// });
+
+// class Cine extends React.Component {
+//   state = {
+//     cropperParams: {},
+//     croppedImage: '',
+//   };
+
+//   setCropperParams = cropperParams => {
+//     this.setState(prevState => ({
+//       ...prevState,
+//       cropperParams,
+//     }));
+//   };
+
+//   handlePress = async () => {
+//     const { cropperParams } = this.state;
+//     const cropSize = {
+//       width: CROP_AREA_WIDTH / 2,
+//       height: CROP_AREA_HEIGHT / 2,
+//     };
+
+//     const cropAreaSize = {
+//       width: CROP_AREA_WIDTH,
+//       height: CROP_AREA_HEIGHT,
+//     };
+
+//     try {
+//       const result = await ImageCropper.crop({
+//         ...cropperParams,
+//         imageUri: IMAGE,
+//         cropSize,
+//         cropAreaSize,
+//       });
+//       this.setState(prevState => ({
+//         ...prevState,
+//         croppedImage: result,
+//       }));
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   render() {
+//     const { croppedImage } = this.state;
+//     const src = { uri: croppedImage };
+
+//     return (
+//       <View style={styles.container}>
+//         <ImageCropper
+//           imageUri={IMAGE}
+//           cropAreaWidth={CROP_AREA_WIDTH}
+//           cropAreaHeight={CROP_AREA_HEIGHT}
+//           setCropperParams={this.setCropperParams}
+//         />
+//         <View style={styles.buttonContainer}>
+//           <Button onPress={this.handlePress} title="Crop Image Cool" color="blue" />
+//         </View>
+//         {croppedImage ? (
+//           <View style={styles.imagePreviewContainer}>
+//             <Image resizeMode="cover" style={styles.imagePreview} source={src} />
+//           </View>
+//         ) : null}
+//       </View>
+//     );
+//   }
+// }
+
+// export default Cine;
+
+
+
+ //import * as React from 'react';
 //  import {
 //    StatusBar,
 //    Text,
@@ -25,7 +194,7 @@
 //      <Text style={styles.paragraph}>Loading...</Text>
 //    </View>
 //  );
-import  Loader from '../../components/Loader/index'
+//import  Loader from '../../components/Loader/index'
  
 //  const Backdrop = ({ movies, scrollX }) => {
 //    return (
@@ -79,7 +248,7 @@ import  Loader from '../../components/Loader/index'
 //    );
 //  };
  
- export default function Cine() {
+ //export default function Cine() {
   //  const [movies, setMovies] = React.useState([]);
   //  const scrollX = React.useRef(new Animated.Value(0)).current;
   //  React.useEffect(() => {
@@ -99,7 +268,7 @@ import  Loader from '../../components/Loader/index'
   //    return <Loading />;
   //  }
  
-   return <Loader /> 
+   //return <Loader /> 
    //(
     //  <View style={styles.container}>
     //    <StatusBar translucent backgroundColor="transparent" />
@@ -168,7 +337,7 @@ import  Loader from '../../components/Loader/index'
     //    />
     //  </View>
   //  );
- }
+ //}
  
 //  const styles = StyleSheet.create({
 //    loadingContainer: {

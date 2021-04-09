@@ -1,34 +1,33 @@
 import React from 'react'
-import ManageWallpaper, { TYPE } from 'react-native-manage-wallpaper'
+import { Dimensions } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import ImagePicker from 'react-native-image-crop-picker'
+import { useNavigation } from '@react-navigation/native'
 
 import { Button } from './styles'
 
+const WIDTH = Dimensions.get('window').width 
+const HEIGHT = Dimensions.get('window').height 
 
 export default function ApplyButton({ image }) {
 
-    function callback() {
-        alert('Aplicado com sucesso!');
-    };
+    const navigation = useNavigation()
 
-    async function setWallpaper() {
-        try {
-            await ManageWallpaper.setWallpaper(
-                {
-                    uri: image,
-                },
-                callback(),
-                TYPE.BOTH,
-            );
-        } catch (error) {
-            console.log('Error => ', error)
-        }
-    };
+    function cropperWallpaper() {
+        ImagePicker.openCropper({
+            path: image,
+            width: WIDTH,
+            height: HEIGHT
+        }).then(wallpaper => {
+            //setWallpaper( wallpaper.path )
+            console.log('Path:   ' + wallpaper.path)
+            navigation.navigate('ApplyWallpaperView', {image: wallpaper.path})
+        });
+    }
 
     return (
-        <Button onPress={setWallpaper} >
+        <Button onPress={() => cropperWallpaper()} >
             <MaterialCommunityIcons name="image-multiple-outline" color='#fff' size={26} />
         </Button>
     );
-
 }

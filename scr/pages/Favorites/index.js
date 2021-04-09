@@ -31,6 +31,41 @@ export default function Favorites() {
 
   const [data, setData] = useState([])
   const scrollX = useRef(new Animated.Value(0)).current
+  const renderItem = ({ item }) => {
+
+    return (
+      <View style={{
+        width,
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOpacity: .5,
+        shadowOffset: {
+          width: 0,
+          height: 0,
+
+        },
+        shadowRadius: 20,
+        paddingTop: 30
+      }}>
+
+        <Wallpaper source={{ uri: item.url }}
+          width={imageW}
+          height={imageH}
+          Style={{ resizeMode: 'cover' }}
+        />
+        <ButtonBar>
+
+          <ApplyButton image={item.urlSource} />
+
+          <RemoveButton image={item.key} />
+
+          <ShareButton imageUrl={item.urlSource} />
+
+        </ButtonBar>
+      </View>
+    )
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -96,41 +131,8 @@ export default function Favorites() {
         keyExtractor={(item, index) => index.toString()}
         horizontal
         pagingEnabled
-        renderItem={({ item }) => {
-
-          return (
-            <View style={{
-              width,
-              justifyContent: 'center',
-              alignItems: 'center',
-              shadowColor: '#000',
-              shadowOpacity: .5,
-              shadowOffset: {
-                width: 0,
-                height: 0,
-
-              },
-              shadowRadius: 20,
-              paddingTop: 30
-            }}>
-
-              <Wallpaper source={{ uri: item.url }}
-                width={imageW}
-                height={imageH}
-                Style={{ resizeMode: 'cover' }}
-              />
-              <ButtonBar>
-
-                <ApplyButton image={item.urlSource} />
-
-                <RemoveButton image={item.key} />
-
-                <ShareButton imageUrl={item.urlSource} />
-
-              </ButtonBar>
-            </View>
-          )
-        }}
+        renderItem={renderItem}
+        extraData={data}
       />
     </Container>
   );

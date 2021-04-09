@@ -1,6 +1,6 @@
 //import { StatusBar } from 'expo-status-bar';
 import React from 'react'
-import { FlatList, Dimensions, TouchableOpacity, View, Text } from 'react-native'
+import { FlatList, Dimensions, TouchableOpacity } from 'react-native'
 
 import getThumbnails from '../../services/Firebase/RealtimeDatabase/thumbnailListFirebase'
 import { Container, Item, Thumbnail, Invisible } from './styles'

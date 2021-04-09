@@ -80,7 +80,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false
+    //enableHermes: false
+    enableHermes: true  // <- here | clean and rebuild if changing
 ]
 
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
@@ -133,6 +134,8 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    //compileSdkVersion 27
+    //buildToolsVersion "27.0.3"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -143,8 +146,10 @@ android {
         applicationId "com.wallpaperapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        //targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {

@@ -3,8 +3,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import theme from '../../themes/light-theme'
-//import Cine from '../../pages/Cine/index'
-import Loader from '../Loader/index'
+import Cine from '../../pages/Cine/index'
+//import Loader from '../Loader/index'
 import  { HomeStackScreen, FavoritesStackScreen, 
           ProfileStackScreen, CineStackScreen } from '../../navigation/StackScreen/index' 
 
@@ -43,7 +43,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 <Tab.Screen
     name="Cine"
-    component={Loader}
+    component={Cine}
     options={{
       tabBarLabel: 'Cinema',
       tabBarColor: theme.TertiaryColor,
