@@ -4,8 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { removeFavorites } from '../../../services/Firebase/RealtimeDatabase/favoritesListFirebase'
 import { Button } from './styles'
 
-export default function RemoveButton({image}) {
-
+export function RemoveButton({image}) {
     return (
         <Button onPress={() => removeFavorites(image)} >
             <MaterialCommunityIcons name="heart-off-outline" color='#fff' size={26} />

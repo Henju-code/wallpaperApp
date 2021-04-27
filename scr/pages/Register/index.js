@@ -14,7 +14,7 @@ import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
 import { registerUser } from '../../services/Firebase/Auth/authMethods'
 
-export default function Register() {
+export function Register() {
 
     const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }))
     const [opacity] = useState(new Animated.Value(0))
@@ -83,7 +83,7 @@ export default function Register() {
     return (
 
         <KeyboardAvoidingView style={styles.background} >
-            <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.profileColor} />
+            <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.tertiaryColor} />
 
             <View style={styles.containerLogo}>
                 <Animated.Image style={{ width: logo.x, height: logo.y }}

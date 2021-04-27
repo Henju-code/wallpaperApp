@@ -7,6 +7,7 @@ import { Container, Item, Thumbnail, Invisible } from './styles'
 
 import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
+import { useNavigation } from '@react-navigation/core'
 
 const numColumns = 2
 const WIDTH = Dimensions.get('window').width
@@ -23,16 +24,17 @@ function formatData(thumbnails, numColumns) {
   return thumbnails
 }
 
-export default function Home({ navigation }) {
+export function Home() {
 
   const thumbnails = getThumbnails()
+  const navigation = useNavigation()
 
   return (
     <Container>
       <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.primaryColor} />
       <FlatList
         data={formatData(thumbnails, numColumns)}
-        renderItem={({ item, index }) => {
+        renderItem={({ item, _ }) => {
           if (item.empty) {
             return <Invisible height={WIDTH / numColumns} />
           }
@@ -47,7 +49,7 @@ export default function Home({ navigation }) {
             </Item>
           )
         }}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         numColumns={numColumns}
       />
     </Container>

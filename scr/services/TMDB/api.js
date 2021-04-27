@@ -52,4 +52,4 @@ export const getMovies = async () => {
   );
 
   return movies;
-};
+};  

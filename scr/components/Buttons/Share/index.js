@@ -4,7 +4,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 import Share from 'react-native-share'
 import { Button } from './styles'
 
-export default function ShareButton({ imageUrl }) {
+export function ShareButton({ imageUrl }) {
 
     async function handleOnPress() {
         let imagePath = null;

@@ -1,40 +1,65 @@
-import React from 'react'
-import auth from '@react-native-firebase/auth'
+import React, { useState } from 'react'
+import { Modal } from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import { logoff } from '../../services/Firebase/Auth/authMethods'
-import { Container, Button, ButtonTitle, Email, UserPhoto } from './styles'
+
+import { SuggestionBox } from './SuggestionBox/index'
+import { Carousel } from './Carousel'
+
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    Image
-} from 'react-native'
+    Container,
+    WaveBackground,
+    Header,
+    UserPhotoContainer,
+    UserPhoto,
+    ButtonContainer,
+    Button
+} from './styles'
 
-export default function UserView() {
 
-    const user = auth().currentUser
 
+export function UserView() {
+
+    const [visible, setVisible] = useState(false)
+
+    const userPhoto = 'https://toppng.com/uploads/preview/witch-ravenna-icon-circle-circle-icon-anime-11553496482f2odwxlakf.png'
+    
     return (
         <Container>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <UserPhoto style={{ width: 200, height: 200, backgroundColor: '#000' }} source={{ uri: 'https://toppng.com/uploads/preview/witch-ravenna-icon-circle-circle-icon-anime-11553496482f2odwxlakf.png' }} />
-                <Email>{user.email}</Email>
-            </View>
+            <WaveBackground source={require('../../assets/wave.png')} >
+                <Modal
+                  visible={visible}
+                  animationType='slide'
+                  transparent
+                  onRequestClose={() => {
+                      setVisible(false);
+                  }}>                     
+                      <SuggestionBox setVisible={setVisible} />       
+                  </Modal>
+                <Header>
 
+                    <UserPhotoContainer>
+                        <UserPhoto source={{uri: userPhoto}} />
+                    </UserPhotoContainer>
 
-            <View style={{ flex: 1, justifyContent: 'center' }}>
-                <Button>
-                    <ButtonTitle>Dark Theme</ButtonTitle>
-                </Button>
+                    <ButtonContainer>
+                        <Button left={50}>
+                            <MaterialCommunityIcons name='weather-night' color='#fff' size={26} />
+                        </Button>
 
-                <Button>
-                    <ButtonTitle>Sugestions</ButtonTitle>
-                </Button>
+                        <Button left={80} onPress={() => setVisible(true)} >
+                            <MaterialCommunityIcons name='email-plus-outline' color='#fff' size={26} />
+                        </Button>
 
-                <Button onPress={() => logoff()} >
-                    <ButtonTitle>Logout</ButtonTitle>
-                </Button>
-            </View>
+                        <Button left={50} onPress={() => logoff()} >
+                            <MaterialCommunityIcons name='exit-to-app' color='#fff' size={26} />
+                        </Button>
+                    </ButtonContainer>
+                </Header>
 
+                <Carousel />
+            </WaveBackground>
         </Container>
     )
 }

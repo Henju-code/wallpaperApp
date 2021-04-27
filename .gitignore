@@ -62,3 +62,8 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+#code
+
+src/services/TMDB/*
+android/app/google-services.json

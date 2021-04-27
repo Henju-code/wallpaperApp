@@ -3,13 +3,12 @@ import { Dimensions } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import ImagePicker from 'react-native-image-crop-picker'
 import { useNavigation } from '@react-navigation/native'
-
 import { Button } from './styles'
 
 const WIDTH = Dimensions.get('window').width 
 const HEIGHT = Dimensions.get('window').height 
 
-export default function ApplyButton({ image }) {
+export function ApplyButton({ image }) {
 
     const navigation = useNavigation()
 
@@ -19,7 +18,6 @@ export default function ApplyButton({ image }) {
             width: WIDTH,
             height: HEIGHT
         }).then(wallpaper => {
-            //setWallpaper( wallpaper.path )
             console.log('Path:   ' + wallpaper.path)
             navigation.navigate('ApplyWallpaperView', {image: wallpaper.path})
         });

@@ -4,8 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { AddFavorites } from '../../../services/Firebase/RealtimeDatabase/favoritesListFirebase'
 import { Button } from './styles'
 
-export default function FavoriteButton({image, imageRef}) {
-    
+export function FavoriteButton({image, imageRef}) {
     return (
         <Button onPress={() => AddFavorites(imageRef, image)} >
             <MaterialCommunityIcons name="heart" color='#fff' size={26} />

@@ -4,9 +4,10 @@ import ManageWallpaper, { TYPE } from 'react-native-manage-wallpaper'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Divider } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
+import FocusAwareStatusBar from '../../components/StatusBar/index'
 
 
-export default function ApplyWallpaperView ({ route }) {
+export function ApplyWallpaperView ({ route }) {
 
     const navigation = useNavigation()
     const [applyType, setApplyType] = useState('')
@@ -53,6 +54,7 @@ export default function ApplyWallpaperView ({ route }) {
 
     return (
         <SafeAreaView style={{ flex: 1, flexDirection: 'column', backgroundColor: 'white' }}>
+            <FocusAwareStatusBar barStyle="light-content" backgroundColor={'transparent'} translucent />
             <ImageBackground
                 style={{ justifyContent: 'center', flex: 1 }}
                 source={{ uri: route.params.image }}

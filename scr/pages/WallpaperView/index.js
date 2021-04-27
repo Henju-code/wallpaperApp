@@ -1,104 +1,34 @@
-import * as React from 'react';
-import { StatusBar, Animated, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
+import { Animated } from 'react-native';
 
-import PreviousButton from '../../components/Buttons/Previous/index'
-import ApplyButton from '../../components/Buttons/Apply/index'
-import FavoriteButton from '../../components/Buttons/Favorite/index'
-import ShareButton from '../../components/Buttons/Share/index'
 import getWallpaperList from '../../services/Firebase/RealtimeDatabase/wallpaperListFirebase'
-import { Container, Wallpaper, ButtonBar } from './styles'
 
-const { width, height } = Dimensions.get('screen');
+import FocusAwareStatusBar from '../../components/StatusBar/index'
+import PreviousButton from '../../components/Buttons/Previous/index'
+import { BlurBackground } from '../../components/BlurBackground'
+import { Carousel } from '../../components/Carousel'
 
-const imageW = width * 0.7;
-const imageH = imageW * 1.54;
+import { Container } from './styles'
 
-export default function WallpaperView({ route }) {
+export function WallpaperView({ route }) {
 
     const data = getWallpaperList(route.params.key)
-    const scrollX = React.useRef(new Animated.Value(0)).current
+    const scrollX = useRef(new Animated.Value(0)).current
 
     return (
-
         <Container>
-                <PreviousButton />
-
-            <StatusBar hidden />
-            <View style={StyleSheet.absoluteFillObject}>
-                {data.map((item, index) => {
-
-                    const inputRange = [
-                        (index - 1) * width,
-                        index * width,
-                        (index + 1) * width
-                    ]
-                    const opacity = scrollX.interpolate({
-                        inputRange,
-                        outputRange: [0, 1, 0]
-                    })
-
-                    return (
-
-                        <Animated.Image key={`image-${index}`}
-                            source={{ uri: item._thumbnail }}
-                            style={[
-                                StyleSheet.absoluteFillObject,
-                                {
-                                    opacity
-                                }
-                            ]}
-                            blurRadius={50}
-                        />
-
-                    )
-                })}
-            </View>
-
-            <Animated.FlatList data={data}
-                onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                    { useNativeDriver: true }
-                )}
-                keyExtractor={(item, index) => index.toString()}
-                horizontal
-                pagingEnabled
-                renderItem={({ item }) => {
-
-                    return (
-                        <View style={{
-                            width,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            shadowColor: '#000',
-                            shadowOpacity: .5,
-                            shadowOffset: {
-                                width: 0,
-                                height: 0,
-
-                            },
-                            shadowRadius: 20,
-                            paddingTop: 30
-                        }}>
-
-                            <Wallpaper source={{ uri: item._thumbnail }}
-                                width={imageW}
-                                height={imageH}
-                                Style={{ resizeMode: 'cover' }}
-                            />
-                            <ButtonBar>
-
-                                <ApplyButton image={item.url} />
-
-                                <FavoriteButton imageRef={route.params.key} image={item} />
-
-                                <ShareButton imageUrl={item.url} />
-
-                            </ButtonBar>
-                        </View>
-                    )
-                }}
+            <PreviousButton />
+            <FocusAwareStatusBar barStyle="light-content" backgroundColor={'transparent'} translucent />
+            <BlurBackground 
+                data={data}
+                scrollX={scrollX}
             />
-
+            
+            <Carousel 
+                likeButtonEnable={true}
+                data={data}
+                scrollX={scrollX}
+            />
         </Container>
     );
 };

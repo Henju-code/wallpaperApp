@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react'
 import {
     View,
     KeyboardAvoidingView,
-    TextInput,
     TouchableOpacity,
     Text,
     StyleSheet,
     Animated,
-    Keyboard
+    Keyboard,
+    TextInput
 } from 'react-native'
+//import { TextInput } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 
-import theme from '../../themes/light-theme'
 import FocusAwareStatusBar from '../../components/StatusBar/index'
 import { signInUser } from '../../services/Firebase/Auth/authMethods'
 
-export default function Login() {
+import theme from '../../themes/light-theme'
+
+export function Login() {
 
     const [offset] = useState(new Animated.ValueXY({ x: 0, y: 95 }))
     const [opacity] = useState(new Animated.Value(0))
@@ -82,10 +84,13 @@ export default function Login() {
 
     return (
 
-        <KeyboardAvoidingView style={styles.background} >
-            <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.profileColor} />
+        
+        
+            // <FocusAwareStatusBar barStyle="light-content" backgroundColor={theme.profileColor} />
+            
+            <View style={styles.container}>
 
-            <View style={styles.containerLogo}>
+            {/* <View style={styles.containerLogo}>
                 <Animated.Image style={{ width: logo.x, height: logo.y }}
                     source={require('../../assets/logo.png')}
                 />
@@ -99,71 +104,80 @@ export default function Login() {
                         { translateY: offset.y }
                     ]
                 }
-            ]}>
-                <TextInput placeholder="Email"
+            ]}> */}
+                <TextInput 
+                    
+                    placeholder="Email"
                     style={styles.input}
                     autoCorrect={false}
-                    onChangeText={(userEmail) => { setEmail(userEmail) }}
+                    onChangeText={(userEmail) =>  setEmail(userEmail) }
                 />
 
-                <TextInput placeholder="Senha"
+                <TextInput 
+                    
+                    placeholder="Senha"
                     style={styles.input}
                     autoCorrect={false}
                     secureTextEntry={true}
-                    onChangeText={(password) => { setPassword(password) }}
+                    onChangeText={(password) =>  setPassword(password) }
                 />
 
-                <TouchableOpacity style={styles.buttonSubmit}
+                <TouchableOpacity 
+                    style={styles.buttonSubmit}
                     onPress={() => { signIn(email, password) }}
                 >
                     <Text style={styles.submitText}>Acessar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.buttonRegister}
+                <TouchableOpacity 
+                    style={styles.buttonRegister}
                     onPress={() => navigation.navigate('Register')}
                 >
                     <Text style={styles.registerText}>Cadastrar-se</Text>
                 </TouchableOpacity>
 
-            </Animated.View>
-        </KeyboardAvoidingView>
+            {/* </Animated.View> */}
+            </View>
+       
     )
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#191919'
-    },
-    containerLogo: {
-        flex: 1,
-        justifyContent: 'center'
-    },
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        paddingBottom: 50
+        paddingBottom: 50,
+        marginTop: 40
+    },
+    containerLogo: {
+        justifyContent: 'center'
+    },
+    form: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        // backgroundColor: '#d3d3d3'
     },
     input: {
-        backgroundColor: '#fff',
-        width: '90%',
-        marginBottom: 15,
-        color: '#222',
+        // backgroundColor: '#fff',
+        width: 120,
+        height: 60,
+        marginTop: 100,
+        color: '#d3d3d3',
         fontSize: 17,
         borderRadius: 7,
         padding: 10
     },
     buttonSubmit: {
-        backgroundColor: '#35AAFF',
+        // backgroundColor: '#35AAFF',
         width: '90%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 7
+        borderRadius: 7,
+        marginTop: 100
     },
     submitText: {
         color: '#fff',

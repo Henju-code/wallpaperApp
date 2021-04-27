@@ -59,30 +59,42 @@ export async function getFavorites() {
 
             for (let key in imagesList) {
                 foldersList.push({ key, ...imagesList[key] })
-
             }
-            foldersList.map((item) => {
-                getImages(item.key)
-            })
+ 
+            // foldersList.map((item) => {
+            //     getImages(item.key)
+            //     //console.log(item.key.-LgOhn2G0k8jCMxZV6Lx)
+            //     //const objItem = []
+
+            //     // for (let key in item) {
+            //     //     objItem.push({ key, ...item[key] })  
+
+            //     // }
+            //     // console.log('+++++++++++++++++++++++++++++++++++++++++\n')
+            //     // objItem.map((element) => {
+            //     //     console.log(element.key)
+            //     // })
+            // })
+          setTimeout(() => {favorites = foldersList}, 1200)    
         })
 
-    const getImages = async (key) => {
-        await database().ref(`/users/${uid}/favourites/${key}`)
-            .once('value', (snapshot) => {
-                const images = snapshot.val()
-                const imgList = []
+    // const getImages = async (key) => {
+    //     await database().ref(`/users/${uid}/favourites/${key}`)
+    //         .once('value', (snapshot) => {
+    //             const images = snapshot.val()
+    //             const imgList = []
 
-                for (let key in images) {
-                    imgList.push({ key, ...images[key] })
+    //             for (let key in images) {
+    //                 imgList.push({ key, ...images[key] })
 
-                }
-                imgList.map((item) => {
-                    auxList[counter] = item
-                    counter++
-                })
-                favorites = auxList
-            })
-    }
+    //             }
+    //             imgList.map((item) => {
+    //                 auxList[counter] = item
+    //                 counter++
+    //             })
+    //             favorites = auxList
+    //         })
+    // }
     console.log('letBee')
 
     return favorites
